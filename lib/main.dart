@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+final List<String> entries = <String>['A', 'B', 'C'];
+final List<int> colorCodes = <int>[600, 500, 100];
+
 void main() {
   runApp(const MyApp());
 }
@@ -40,60 +43,53 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-          icon: const Icon(Icons.menu),
-          onPressed: () {},
-        ),
-        actions: [
-          IconButton(
+        appBar: AppBar(
+          leading: IconButton(
             tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-            icon: const Icon(Icons.favorite),
+            icon: const Icon(Icons.menu),
             onPressed: () {},
           ),
-          IconButton(
-            tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-            icon: const Icon(Icons.search),
-            onPressed: () {},
-          ),
-          PopupMenuButton<Text>(
-            itemBuilder: (context) {
-              return [
-                PopupMenuItem(
-                  child: Text("First"),
-                ),
-                PopupMenuItem(
-                  child: Text("Second"),
-                ),
-                PopupMenuItem(
-                  child: Text("Third"),
-                ),
-              ];
-            },
-          )
-        ],
-        title: Text('Return'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have clicked the button this many times:',
+          actions: [
+            IconButton(
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+              icon: const Icon(Icons.favorite),
+              onPressed: () {},
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            IconButton(
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+              icon: const Icon(Icons.search),
+              onPressed: () {},
             ),
+            PopupMenuButton<Text>(
+              itemBuilder: (context) {
+                return [
+                  PopupMenuItem(
+                    child: Text("First"),
+                  ),
+                  PopupMenuItem(
+                    child: Text("Second"),
+                  ),
+                  PopupMenuItem(
+                    child: Text("Third"),
+                  ),
+                ];
+              },
+            )
           ],
+          title: Text('Return'),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        body: ListView.separated(
+          padding: const EdgeInsets.all(8),
+          itemCount: entries.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              height: 50,
+              color: Colors.amber[colorCodes[index]],
+              child: Center(child: Text('Entry ${entries[index]}')),
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) =>
+              const Divider(),
+        ));
   }
 }
