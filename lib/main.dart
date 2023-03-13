@@ -9,11 +9,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter layout demo',
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Flutter layout demo'),
-        ),
-        body: const MyStatelessWidget(),
-      ),
+          appBar: AppBar(
+            title: const Text('Flutter layout demo'),
+          ),
+          body: const Center(
+            child: const MyStatelessWidget(),
+          )),
     );
   }
 }
@@ -24,15 +25,13 @@ class MyStatelessWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blue,
-      alignment: Alignment.center,
-      width: double.infinity,
-      height: 100.0,
-      child: AspectRatio(
-        aspectRatio: 16 / 9,
-        child: Container(
-          color: Colors.green,
-        ),
+      height: 400,
+      width: 300,
+      color: Colors.red,
+      child: FittedBox(
+        fit: BoxFit.fill,
+        child: Image.network(
+            'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
       ),
     );
   }
